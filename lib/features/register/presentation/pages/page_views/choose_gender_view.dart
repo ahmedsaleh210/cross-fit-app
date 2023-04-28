@@ -3,7 +3,7 @@ import 'package:cross_fit/features/register/presentation/widgets/gender_item.dar
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import '../../../data/models/gender_model.dart';
+import '../../../utils/gender_model.dart';
 import '../../widgets/description_item.dart';
 
 class ChooseGenderView extends StatelessWidget {

@@ -1,7 +1,6 @@
 import 'dart:developer';
 
 import 'package:cross_fit/core/utils/parsing_extension.dart';
-import 'package:cross_fit/features/register/data/models/gender_model.dart';
 import 'package:cross_fit/features/register/presentation/manager/register_utils.dart';
 import 'package:cross_fit/features/register/presentation/pages/page_views/inbody_info_view.dart';
 import 'package:flutter/cupertino.dart';
@@ -11,8 +10,9 @@ import 'package:rounded_loading_button/rounded_loading_button.dart';
 
 import '../../../../core/components/toast_message.dart';
 import '../../../../core/routes/app_router.dart';
-import '../../data/models/goal_model.dart';
 import '../../data/repositories/register_repository.dart';
+import '../../utils/gender_model.dart';
+import '../../utils/goal_model.dart';
 import '../pages/page_views/choose_gender_view.dart';
 import '../pages/page_views/training_goal_view.dart';
 part 'register_state.dart';
