@@ -1,13 +1,18 @@
 import 'package:cross_fit/core/utils/assets_manager.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../../core/routes/app_router.dart';
-import '../../models/onboarding_model.dart';
+import '../../../../core/utils/caching_keys.dart';
+import '../../utils/onboarding_model.dart';
 part 'onboarding_state.dart';
 
 class OnBoardingCubit extends Cubit<OnBoardingState> {
-  OnBoardingCubit() : super(OnBoardingInitialState());
+  final SharedPreferences sharedPreferences;
+
+  OnBoardingCubit({required this.sharedPreferences})
+      : super(OnBoardingInitialState());
   static OnBoardingCubit get(context) => BlocProvider.of(context);
 
   List<BoardingModel> boarding = [
@@ -33,9 +38,10 @@ class OnBoardingCubit extends Cubit<OnBoardingState> {
 
   get isLast => currentIndex == boarding.length - 1;
 
-  void navigateToLogin(context)
-  {
-    Navigator.pushNamedAndRemoveUntil(context, Routes.loginRoute, (route) => false);
+  void navigateToLogin(context) {
+    sharedPreferences.setBool(CachingKeys.finishBoarding, true);
+    Navigator.pushNamedAndRemoveUntil(
+        context, Routes.loginRoute, (route) => false);
   }
 
   void changeIndex(context) {

@@ -1,12 +1,13 @@
 import 'package:cross_fit/core/components/app_text.dart';
 import 'package:cross_fit/core/components/default_button.dart';
+import 'package:cross_fit/core/utils/assets_manager.dart';
 import 'package:cross_fit/core/utils/sizedbox_extension.dart';
 import 'package:cross_fit/features/register/presentation/widgets/description_item.dart';
 import 'package:cross_fit/features/register/presentation/widgets/gradient_circular_progress.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hexcolor/hexcolor.dart';
-
+import 'package:lottie/lottie.dart';
 import '../../../../../core/routes/app_router.dart';
 
 class LoadingDietScreen extends StatelessWidget {
@@ -23,13 +24,14 @@ class LoadingDietScreen extends StatelessWidget {
             100.heightSpace,
             const DescriptionItem(content: 'Your personal Info'),
             50.heightSpace,
-            GradientCircularProgressIndicator(
-              gradient: LinearGradient(
-                colors: [HexColor('#00C853'), HexColor('#69F0AE')],
-              ),
-              radius: 100.sp,
-              value: 0.7,
-            ),
+            Lottie.asset(LottieAssets.confirmRegister, width: 200.w, height: 200.h),
+            // GradientCircularProgressIndicator(
+            //   gradient: LinearGradient(
+            //     colors: [HexColor('#00C853'), HexColor('#69F0AE')],
+            //   ),
+            //   radius: 100.sp,
+            //   value: 0.7,
+            // ),
             35.heightSpace,
             Padding(
               padding: EdgeInsets.symmetric(horizontal: 20.w),

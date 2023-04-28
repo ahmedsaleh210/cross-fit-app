@@ -1,4 +1,3 @@
-import 'package:cross_fit/features/profile/data/models/dummy_data.dart';
 import 'package:cross_fit/features/profile/presentation/manager/profile_cubit.dart';
 import 'package:cross_fit/features/profile/presentation/widgets/avatar_item.dart';
 import 'package:cross_fit/features/profile/presentation/widgets/blurred_image.dart';
@@ -9,6 +8,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:cross_fit/injector.dart' as di;
 
+import '../manager/profile_utils.dart';
+
 class ProfileScreen extends StatelessWidget {
   const ProfileScreen({Key? key}) : super(key: key);
 
@@ -18,9 +19,9 @@ class ProfileScreen extends StatelessWidget {
       create: (context) => di.sl<ProfileCubit>(),
       child: BlocConsumer<ProfileCubit, ProfileState>(
         listener: (context, state) {
-          // TODO: implement listener
         },
         builder: (context, state) {
+          final cubit = ProfileCubit.get(context);
           String imageUrl =
               'https://i.insider.com/586c15f1ee14b6ce348b5f7e?width=889&format=jpeg';
           return SafeArea(
@@ -35,6 +36,14 @@ class ProfileScreen extends StatelessWidget {
                       imageUrl: imageUrl,
                     )),
                 Positioned(
+                    top: 0,
+                    right: 0,
+                    child: IconButton(
+                        onPressed: () {
+                          cubit.logout(context);
+                        },
+                        icon: Icon(Icons.logout, size: 25.sp))),
+                Positioned(
                   top: 160.h,
                   child: RoundedBody(
                     child: Padding(
@@ -43,13 +52,13 @@ class ProfileScreen extends StatelessWidget {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: List.generate(
-                                  10,
+                                  profileDataList.length,
                                   (index) => ListTileItem(
-                                      title: profileData[index].title,
-                                      value: profileData[index].value))
+                                      title: profileDataList[index].title,
+                                      value: profileDataList[index].value))
                               .map((e) => Padding(
                                     padding:
-                                        EdgeInsets.symmetric(vertical: 11.h),
+                                        EdgeInsets.symmetric(vertical: 12.h),
                                     child: e,
                                   ))
                               .toList(),

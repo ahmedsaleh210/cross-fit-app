@@ -1,9 +1,11 @@
 import 'package:cross_fit/core/utils/sizedbox_extension.dart';
+import 'package:cross_fit/features/register/presentation/manager/register_utils.dart';
 import 'package:cross_fit/features/register/presentation/widgets/description_item.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../../../core/components/default_textfield.dart';
+import '../../../../../core/utils/validators.dart';
 
 class InBodyInfoView extends StatelessWidget {
   const InBodyInfoView({Key? key}) : super(key: key);
@@ -20,56 +22,66 @@ class InBodyInfoView extends StatelessWidget {
             20.heightSpace,
             Padding(
               padding: EdgeInsets.symmetric(horizontal: 15.w),
-              child: Column(
-                children: [
-                  const DefaultTextField(
+              child: Form(
+                key: RegisterForms.registerBodyInfoForm,
+                child: Column(children: [
+                  DefaultTextField(
                     inputType: TextInputType.number,
                     title: 'Age',
                     maxLength: 2,
+                    controller: RegisterTextControllers.ageController,
+                    validator: Validators.ageValidator,
                   ),
-                  const DefaultTextField(
+                  DefaultTextField(
                     inputType: TextInputType.number,
                     title: 'Weight',
                     suffixText: 'kg',
                     maxLength: 3,
+                    controller: RegisterTextControllers.weightController,
+                    validator: Validators.weightValidator,
                   ),
-                   const DefaultTextField(
+                  DefaultTextField(
                     inputType: TextInputType.number,
-                    secure: true,
-                    title: 'Height',
                     suffixText: 'cm',
+                    title: 'Height',
                     maxLength: 3,
+                    controller: RegisterTextControllers.heightController,
+                    validator: Validators.heightValidator,
                   ),
-                   const DefaultTextField(
+                  DefaultTextField(
                     inputType: TextInputType.number,
-                    secure: true,
                     title: 'Percent body fat',
                     suffixText: '%',
-                     maxLength: 3,
+                    maxLength: 3,
+                    controller: RegisterTextControllers.percentBodyFatController,
+                    validator: Validators.percentBodyValidator,
                   ),
-                   const DefaultTextField(
+                  DefaultTextField(
                     inputType: TextInputType.number,
-                    secure: true,
                     title: 'Muscle mass',
                     suffixText: 'kg',
-                     maxLength: 3,
+                    maxLength: 3,
+                    controller: RegisterTextControllers.muscleMassController,
+                    validator: Validators.muscleMassValidator,
                   ),
-                   const DefaultTextField(
+                  DefaultTextField(
                     inputType: TextInputType.number,
-                    secure: true,
                     title: 'Fat mass',
                     suffixText: 'kg',
-                      maxLength: 3,
+                    maxLength: 3,
+                    controller: RegisterTextControllers.fatMassController,
+                    validator: Validators.fatMassValidator,
                   ),
-                  const DefaultTextField(
+                  DefaultTextField(
                     inputType: TextInputType.number,
-                    secure: true,
                     title: 'BMI',
                     suffixText: 'kg/m2',
-                      maxLength: 3,
+                    maxLength: 3,
+                    controller: RegisterTextControllers.bmiController,
+                    validator: Validators.bmiValidator,
                   ),
-                30.heightSpace,
-                ]
+                  30.heightSpace,
+                ]),
               ),
             )
           ],

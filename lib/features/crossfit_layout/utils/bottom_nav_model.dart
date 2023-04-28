@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../../../core/styles/icons/cross_fit_icons_icons.dart';
+import '../../../core/styles/icons/cross_fit_icons_icons.dart';
 
 class BottomNavItem {
   final String title;

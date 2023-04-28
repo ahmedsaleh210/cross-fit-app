@@ -11,7 +11,7 @@ ThemeData appTheme() {
     colorScheme: ColorScheme.light(
       primary: AppColors.kGreen,
     ),
-    fontFamily: poppinsFont,
+    fontFamily: FontsConstants.poppinsFont,
     appBarTheme: AppBarTheme(
       backgroundColor: AppColors.kMediumBlack,
       toolbarTextStyle: TextStyle(

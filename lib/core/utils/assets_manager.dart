@@ -1,4 +1,5 @@
 const imgPath = 'assets/images/';
+const lottiePath = 'assets/lottie/';
 class ImgAssets
 {
   static const String splash = '${imgPath}splash.png';
@@ -12,4 +13,9 @@ class ImgAssets
 class SvgAssets
 {
   static const String logo = '${imgPath}logo.svg';
+}
+
+class LottieAssets
+{
+  static const String confirmRegister = '${lottiePath}confirm_register.json';
 }

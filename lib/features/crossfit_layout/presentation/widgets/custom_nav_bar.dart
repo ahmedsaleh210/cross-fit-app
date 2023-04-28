@@ -1,5 +1,5 @@
 import 'package:cross_fit/core/styles/colors/colors.dart';
-import 'package:cross_fit/features/crossfit_layout/data/models/bottom_nav_model.dart';
+import 'package:cross_fit/features/crossfit_layout/utils/bottom_nav_model.dart';
 import 'package:cross_fit/features/crossfit_layout/presentation/manager/cross_fit_layout_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';

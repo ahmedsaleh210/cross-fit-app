@@ -5,7 +5,7 @@ import '../../../../core/components/app_text.dart';
 
 class ListTileItem extends StatelessWidget {
   final String title;
-  final String value;
+  final dynamic value;
   const ListTileItem({Key? key,required this.title,required this.value}) : super(key: key);
 
   @override
@@ -21,7 +21,7 @@ class ListTileItem extends StatelessWidget {
         SizedBox(
           width: 70.w,
           child: AppText(
-            value,
+            '$value',
             fontSize: 12.sp,
             textAlign: TextAlign.end,
             maxLines: 2,

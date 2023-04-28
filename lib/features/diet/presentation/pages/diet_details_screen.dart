@@ -13,27 +13,34 @@ class DietDetailsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    List<String> dummyList = ['Breakfast', 'Lunch', 'Dinner'];
     return BlocProvider.value(
       value: cubit,
-      child: Scaffold(
-        body: CustomScrollView(
-          physics: const BouncingScrollPhysics(),
-          slivers: [
-            const CustomSliverAppBar(),
-            SliverToBoxAdapter(
-              child: 15.heightSpace,
+      child: BlocBuilder<DietCubit, DietState>(
+        builder: (context, state) {
+              final dietCubit = context.read<DietCubit>();
+
+          return Scaffold(
+            body: CustomScrollView(
+              physics: const BouncingScrollPhysics(),
+              slivers: [
+                const CustomSliverAppBar(),
+                SliverToBoxAdapter(
+                  child: 15.heightSpace,
+                ),
+                SliverList(
+                    delegate: SliverChildBuilderDelegate(
+                        childCount: 3,
+                        (context, index) => Padding(
+                              padding: EdgeInsets.symmetric(
+                                  vertical: 10.h, horizontal: 20.w),
+                              child: BuildMealsContainer(
+                                diets: dietCubit.diets[index],
+                              ),
+                            ))),
+              ],
             ),
-            SliverList(
-                delegate: SliverChildBuilderDelegate(
-                    childCount: 3,
-                    (context, index) => Padding(
-                          padding: EdgeInsets.symmetric(
-                              vertical: 10.h, horizontal: 20.w),
-                          child: BuildMealsContainer(title: dummyList[index],mealsCount: index==1?4:3,),
-                        ))),
-          ],
-        ),
+          );
+        },
       ),
     );
   }

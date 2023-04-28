@@ -21,72 +21,73 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) =>
-      di.sl<HomeCubit>()
-        ..changeLoading(),
+      create: (context) => di.sl<HomeCubit>()..getHomeData(),
       child: BlocConsumer<HomeCubit, HomeState>(
         listener: (context, state) {},
-        buildWhen: (previous, current) {
-          if (current is DataLoaded || current is DataLoading) {
-            return false;
-          }
-          return true;
-        },
         builder: (context, state) {
           log('test');
-          final cubit = HomeCubit.get(context);
           return Scaffold(
               appBar: const CustomAppBar(),
-              body: SingleChildScrollView(
-                physics: const BouncingScrollPhysics(),
-                child: Padding(
-                  padding: EdgeInsets.symmetric(
-                      horizontal: 10.w, vertical: 10.h),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      const AppText(AppStrings.summary,
-                          fontSize: 20, fontWeight: FontWeight.bold),
-                      const CircularChart(),
-                      12.heightSpace,
-                      SizedBox(
-                        height: 200.h,
-                        child: const BarChart(),
-                      ),
-                      12.heightSpace,
-                      const AppText(AppStrings.todayMeals,
-                          fontSize: 20, fontWeight: FontWeight.bold),
-                      12.heightSpace,
-                      BlocBuilder<HomeCubit, HomeState>(
-                        buildWhen: (previous, current) {
-                          if (current is DataLoaded) {
-                            return true;
-                          }
-                          return false;
-                        },
-                        builder: (context, state) {
-                          return SizedBox(
-                            height: 135.h,
-                            child: ListView.builder(
-                              physics: const BouncingScrollPhysics(),
-                              itemBuilder: (context, index) {
-                                if (cubit.isLoading) {
-                                  return const ShimmerLoadingItem();
-                                } else {
-                                  return const MealTodayItem();
-                                }
-                              },
-                              scrollDirection: Axis.horizontal,
-                              itemCount: 5,
+              body: state is DataLoaded
+                  ? SingleChildScrollView(
+                      physics: const BouncingScrollPhysics(),
+                      child: Padding(
+                        padding: EdgeInsets.symmetric(
+                            horizontal: 10.w, vertical: 10.h),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            const AppText(AppStrings.summary,
+                                fontSize: 20, fontWeight: FontWeight.bold),
+                            CircularChart(
+                              data: state.nutritionalModel,
                             ),
-                          );
-                        },
+                            12.heightSpace,
+                            SizedBox(
+                              height: 200.h,
+                              child: BarChart(
+                                nutritionalModel: state.nutritionalModel,
+                              ),
+                            ),
+                            12.heightSpace,
+                            const AppText(AppStrings.todayMeals,
+                                fontSize: 20, fontWeight: FontWeight.bold),
+                            12.heightSpace,
+                            BlocBuilder<HomeCubit, HomeState>(
+                              buildWhen: (previous, current) {
+                                if (current is DataLoaded) {
+                                  return true;
+                                }
+                                return false;
+                              },
+                              builder: (context, state) {
+                                return SizedBox(
+                                  height: 135.h,
+                                  child: ListView.builder(
+                                    physics: const BouncingScrollPhysics(),
+                                    itemBuilder: (context, index) {
+                                      if (state is DataLoading) {
+                                        return const ShimmerLoadingItem();
+                                      } else {
+                                        return MealTodayItem(
+                                            mealModel: (state as DataLoaded)
+                                                .mealModel[index]);
+                                      }
+                                    },
+                                    scrollDirection: Axis.horizontal,
+                                    itemCount: state is DataLoaded
+                                        ? state.mealModel.length
+                                        : 5,
+                                  ),
+                                );
+                              },
+                            ),
+                            75.heightSpace,
+                          ],
+                        ),
                       ),
-                      75.heightSpace,
-                    ],
-                  ),
-                ),
-              ));
+                    )
+                  : const Center(child: CircularProgressIndicator()));
         },
       ),
     );

@@ -82,7 +82,7 @@ class AppRoutes {
           type: PageTransitionType.rightToLeftWithFade,
           duration: const Duration(milliseconds: 800),
           child: BlocProvider(
-            create: (context) => di.sl<CrossFitLayoutCubit>(),
+            create: (context) => di.sl<CrossFitLayoutCubit>()..getUserData(),
             child: const CrossFitLayout(),
           ),
         );

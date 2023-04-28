@@ -7,18 +7,21 @@ import 'app_text.dart';
 class AmountContainer extends StatelessWidget {
   final double value;
   final Color? color;
-  const AmountContainer(this.value,{Key? key, this.color}) : super(key: key);
+  const AmountContainer(this.value, {Key? key, this.color}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return  Container(
+    return Container(
       decoration: BoxDecoration(
-          color: color??AppColors.kPurple,
-          borderRadius: BorderRadius.circular(10)
-      ),
+          color: color ?? AppColors.kPurple,
+          borderRadius: BorderRadius.circular(10)),
       child: Padding(
         padding: EdgeInsets.symmetric(vertical: 1.h, horizontal: 6.w),
-        child: Center(child: AppText('${value}cal', fontSize: 10.sp, fontWeight: FontWeight.bold, color: Colors.white)),
+        child: Center(
+            child: AppText('${value}cal',
+                fontSize: 10.sp,
+                fontWeight: FontWeight.bold,
+                color: Colors.white)),
       ),
     );
   }

@@ -6,9 +6,11 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../../core/components/app_text.dart';
 import '../../../../core/styles/colors/colors.dart';
+import '../../../diet/data/models/meal_model.dart';
 
 class MealTodayItem extends StatelessWidget {
-  const MealTodayItem({Key? key}) : super(key: key);
+  final MealModel mealModel;
+  const MealTodayItem({Key? key, required this.mealModel}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -20,8 +22,7 @@ class MealTodayItem extends StatelessWidget {
         clipBehavior: Clip.antiAlias,
         decoration: BoxDecoration(
             color: AppColors.kDarkBlack,
-            borderRadius: BorderRadius.circular(10)
-        ),
+            borderRadius: BorderRadius.circular(10)),
         child: Material(
           color: Colors.transparent,
           child: InkWell(
@@ -33,24 +34,32 @@ class MealTodayItem extends StatelessWidget {
                 children: [
                   Row(
                     children: [
-                      Expanded(child: AppText('Break fast', fontSize: 10.sp, fontWeight: FontWeight.bold)),
-                     const AmountContainer(300),
+                      Expanded(
+                          child: AppText('Breakfast',
+                              fontSize: 10.sp, fontWeight: FontWeight.bold)),
+                      AmountContainer(mealModel.calories),
                     ],
                   ),
                   15.heightSpace,
                   Expanded(
                     child: Row(
-                        children: List.generate(2, (index) => Expanded(
-                          child: Column(
-                            children: [
-                              const DietImageItem(imageUrl: 'https://images.everydayhealth.com/images/apples-101-about-1440x810.jpg'),
-                              8.heightSpace,
-                              AppText('Apple', fontSize: 10.sp, fontWeight: FontWeight.bold),
-                            ],
-                          ),
+                        children: List.generate(
+                      2,
+                      (index) => Expanded(
+                        child: Column(
+                          children: [
+                            DietImageItem(imageUrl: mealModel.image),
+                            8.heightSpace,
+                            AppText(
+                              mealModel.title,
+                              fontSize: 10.sp,
+                              fontWeight: FontWeight.bold,
+                              overflow: TextOverflow.ellipsis,
+                            ),
+                          ],
                         ),
-                        )
-                    ),
+                      ),
+                    )),
                   )
                 ],
               ),

@@ -11,6 +11,8 @@ import 'package:flutter_svg/flutter_svg.dart';
 
 import '../../../../core/components/default_progress_button.dart';
 import '../../../../core/styles/colors/colors.dart';
+import '../../../../core/utils/validators.dart';
+import '../manager/login_utils.dart';
 
 class LoginScreen extends StatelessWidget {
   const LoginScreen({Key? key}) : super(key: key);
@@ -18,17 +20,16 @@ class LoginScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<LoginCubit, LoginState>(
-      listener: (context, state) {
-      },
+      listener: (context, state) {},
       builder: (context, state) {
         final cubit = LoginCubit.get(context);
         return Scaffold(
             body: Center(
-              child: SingleChildScrollView(
-                physics: const BouncingScrollPhysics(),
-                child: Padding(
-          padding: EdgeInsets.symmetric(horizontal: 12.w),
-          child: Column(
+          child: SingleChildScrollView(
+            physics: const BouncingScrollPhysics(),
+            child: Padding(
+              padding: EdgeInsets.symmetric(horizontal: 12.w),
+              child: Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
@@ -45,19 +46,26 @@ class LoginScreen extends StatelessWidget {
                     fontWeight: FontWeight.w700,
                   ),
                   60.heightSpace,
-                  Column(
-                    children: [
-                      const DefaultTextField(
-                        inputType: TextInputType.emailAddress,
-                        title: 'Email',
-                      ),
-                      10.heightSpace,
-                      const DefaultTextField(
-                        inputType: TextInputType.visiblePassword,
-                        secure: true,
-                        title: 'Password',
-                      ),
-                    ],
+                  Form(
+                    key: LoginForms.loginForm,
+                    child: Column(
+                      children: [
+                        DefaultTextField(
+                          inputType: TextInputType.emailAddress,
+                          title: 'Email',
+                          controller: LoginTextController.emailController,
+                          validator: Validators.emailValidator,
+                        ),
+                        10.heightSpace,
+                        DefaultTextField(
+                          inputType: TextInputType.visiblePassword,
+                          secure: true,
+                          title: 'Password',
+                          controller: LoginTextController.passwordController,
+                          validator: Validators.passwordValidator,
+                        ),
+                      ],
+                    ),
                   ),
                   10.heightSpace,
                   Align(
@@ -76,7 +84,7 @@ class LoginScreen extends StatelessWidget {
                     child: DefaultProgressButton(
                       title: 'Sign in',
                       onPressed: () {
-                        cubit.login();
+                        cubit.login(context);
                       },
                       controller: cubit.loginBtnController,
                     ),
@@ -100,10 +108,10 @@ class LoginScreen extends StatelessWidget {
                     ],
                   )
                 ],
-          ),
-        ),
               ),
-            ));
+            ),
+          ),
+        ));
       },
     );
   }

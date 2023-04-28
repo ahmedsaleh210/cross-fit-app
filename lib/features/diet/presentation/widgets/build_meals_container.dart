@@ -1,18 +1,21 @@
 import 'package:cross_fit/core/utils/sizedbox_extension.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../../core/components/app_text.dart';
 import '../../../../core/styles/colors/colors.dart';
+import '../../utils/diet_item.dart';
+import '../manager/diet_cubit.dart';
 import 'build_meal_item.dart';
 
 class BuildMealsContainer extends StatelessWidget {
-  final String title;
-  final int mealsCount;
-  const BuildMealsContainer({Key? key,required this.title,this.mealsCount=3}) : super(key: key);
+  final DietItem diets;
+  const BuildMealsContainer({Key? key, required this.diets}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    final cubit = context.read<DietCubit>();
     return Column(
       children: [
         Row(
@@ -23,7 +26,7 @@ class BuildMealsContainer extends StatelessWidget {
             ),
             5.widthSpace,
             AppText(
-              title,
+              diets.title,
               fontWeight: FontWeight.w600,
               fontSize: 18.sp,
             ),
@@ -37,15 +40,15 @@ class BuildMealsContainer extends StatelessWidget {
             borderRadius: BorderRadius.circular(30),
           ),
           child: Padding(
-              padding: EdgeInsets.symmetric(
-                  horizontal: 15.w, vertical: 10.h),
+              padding: EdgeInsets.symmetric(horizontal: 15.w, vertical: 10.h),
               child: Column(
-                  children: List.generate(mealsCount, (index) => Padding(
-                    padding: EdgeInsets.symmetric(vertical: 8.h),
-                    child: const BuildMealItem(),
-                  ),)
-              )
-          ),
+                  children: List.generate(
+                cubit.diets.length,
+                (index) => Padding(
+                  padding: EdgeInsets.symmetric(vertical: 8.h),
+                  child: BuildMealItem(meal: diets.meals[index]),
+                ),
+              ))),
         ),
       ],
     );

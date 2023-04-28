@@ -11,10 +11,13 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 import '../../../../core/styles/colors/colors.dart';
+import '../../../../core/utils/validators.dart';
+import '../manager/register_utils.dart';
 
 class RegisterScreen extends StatelessWidget {
   final RegisterCubit registerCubit;
-  const RegisterScreen({Key? key,required this.registerCubit}) : super(key: key);
+  const RegisterScreen({Key? key, required this.registerCubit})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -45,37 +48,52 @@ class RegisterScreen extends StatelessWidget {
                       fontWeight: FontWeight.w700,
                     ),
                     60.heightSpace,
-                    Column(
-                      children: const [
-                        DefaultTextField(
-                          inputType: TextInputType.text,
-                          title: 'Enter your name',
-                        ),
-                        DefaultTextField(
-                          inputType: TextInputType.emailAddress,
-                          title: 'Enter your email',
-                        ),
-                        DefaultTextField(
-                          inputType: TextInputType.visiblePassword,
-                          secure: true,
-                          title: 'Password',
-                        ),
-                        DefaultTextField(
-                          inputType: TextInputType.visiblePassword,
-                          secure: true,
-                          title: 'Confirm Password',
-                        ),
-                      ]
-                          .map((e) => Padding(
-                              padding: const EdgeInsets.only(bottom: 25),
-                              child: e))
-                          .toList(),
+                    Form(
+                      key: RegisterForms.registerAuthForm,
+                      child: Column(
+                        children: [
+                          DefaultTextField(
+                            inputType: TextInputType.text,
+                            controller: RegisterTextControllers.nameController,
+                            title: 'Enter your name',
+                            validator: Validators.nameValidator,
+                          ),
+                          DefaultTextField(
+                            inputType: TextInputType.emailAddress,
+                            title: 'Enter your email',
+                            controller: RegisterTextControllers.emailController,
+                            validator: Validators.emailValidator,
+                          ),
+                          DefaultTextField(
+                            inputType: TextInputType.visiblePassword,
+                            secure: true,
+                            title: 'Password',
+                            controller:
+                                RegisterTextControllers.passwordController,
+                            validator:
+                                Validators.passwordValidator,
+                          ),
+                          DefaultTextField(
+                            inputType: TextInputType.visiblePassword,
+                            secure: true,
+                            title: 'Confirm Password',
+                            controller:
+                                RegisterTextControllers.confirmPasswordController,
+                            validator: Validators.confirmPasswordValidator,
+                          ),
+                        ]
+                            .map((e) => Padding(
+                                padding: const EdgeInsets.only(bottom: 25),
+                                child: e))
+                            .toList(),
+                      ),
                     ),
                     10.heightSpace,
                     DefaultProgressButton(
                         title: 'Sign up',
                         onPressed: () {
-                          cubit.navigateToRegisterDetails(context: context, registerCubit: registerCubit);
+                          cubit.navigateToRegisterDetails(
+                              context: context, registerCubit: registerCubit);
                         },
                         controller: cubit.registerBtnController),
                     Row(

@@ -4,11 +4,20 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../../core/components/app_text.dart';
 import '../../../../core/styles/colors/colors.dart';
+import '../../../../core/shared/diet_model.dart';
 import '../manager/diet_cubit.dart';
+import '../../utils/diet_utils.dart';
 
 class DietItem extends StatelessWidget {
   final DietCubit cubit;
-  const DietItem({Key? key,required this.cubit}) : super(key: key);
+  final DietModel nutritionalModel;
+  final List<NutritionalItem> nutritionalItems;
+  const DietItem(
+      {Key? key,
+      required this.cubit,
+      required this.nutritionalItems,
+      required this.nutritionalModel})
+      : super(key: key);
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -51,14 +60,17 @@ class DietItem extends StatelessWidget {
                     fontWeight: FontWeight.w500,
                     color: AppColors.kGreen),
                 6.heightSpace,
-                AppText('1584.0 Kcal',
+                AppText('${nutritionalModel.calories} Kcal',
                     fontSize: 17.sp,
                     fontWeight: FontWeight.bold,
                     color: AppColors.kGreen),
                 const Spacer(),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: List.generate(3, (index) => _buildDetails(context)),
+                  children: List.generate(
+                      nutritionalItems.length,
+                      (index) =>
+                          _buildDetails(context, nutritionalItems[index])),
                 )
               ],
             ),
@@ -68,7 +80,7 @@ class DietItem extends StatelessWidget {
     );
   }
 
-  Widget _buildDetails(BuildContext context) {
+  Widget _buildDetails(BuildContext context, NutritionalItem nutritionalItem) {
     return Text.rich(TextSpan(
         style: TextStyle(
           fontSize: 12.sp,
@@ -76,13 +88,13 @@ class DietItem extends StatelessWidget {
         ),
         children: [
           TextSpan(
-            text: 'Protein: ',
+            text: '${nutritionalItem.title}: ',
             style: TextStyle(
               color: Theme.of(context).textTheme.bodySmall!.color,
             ),
           ),
           TextSpan(
-            text: '100g',
+            text: '${nutritionalItem.value}g',
             style: TextStyle(
               color: AppColors.kGreen,
             ),
