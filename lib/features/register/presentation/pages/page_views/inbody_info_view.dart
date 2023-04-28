@@ -1,5 +1,5 @@
 import 'package:cross_fit/core/utils/sizedbox_extension.dart';
-import 'package:cross_fit/features/register/presentation/manager/register_utils.dart';
+import 'package:cross_fit/features/register/utils/register_utils.dart';
 import 'package:cross_fit/features/register/presentation/widgets/description_item.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';

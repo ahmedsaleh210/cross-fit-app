@@ -12,7 +12,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 
 import '../../../../core/styles/colors/colors.dart';
 import '../../../../core/utils/validators.dart';
-import '../manager/register_utils.dart';
+import '../../utils/register_utils.dart';
 
 class RegisterScreen extends StatelessWidget {
   final RegisterCubit registerCubit;

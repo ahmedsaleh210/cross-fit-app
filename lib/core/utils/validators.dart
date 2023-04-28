@@ -1,4 +1,4 @@
-import '../../features/register/presentation/manager/register_utils.dart';
+import '../../features/register/utils/register_utils.dart';
 
 class Validators {
   static String? emailValidator(dynamic value) {
