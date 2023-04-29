@@ -52,7 +52,7 @@ class DefaultTextField extends StatelessWidget {
       maxLength: maxLength,
       readOnly: readOnly,
       textAlign: textAlign!,
-      maxLines: inputType == TextInputType.multiline ? null : 1,
+      maxLines: inputType == TextInputType.multiline ? 7 : 1,
       onFieldSubmitted: onSubmitted,
       decoration: InputDecoration(
 
@@ -67,7 +67,7 @@ class DefaultTextField extends StatelessWidget {
         label: isLabel ? Text(label!) : null,
         labelStyle: isLabel ? const TextStyle(color: Colors.black) : null,
         hintStyle: TextStyle(color: AppColors.kGrey),
-        enabledBorder: OutlineInputBorder(
+        border: OutlineInputBorder(
             borderRadius: BorderRadius.circular(25),
 
             borderSide: BorderSide.none),

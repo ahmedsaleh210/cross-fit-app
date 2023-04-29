@@ -8,6 +8,7 @@ import '../../../../core/routes/app_router.dart';
 import '../../../../core/styles/colors/colors.dart';
 import '../../data/models/meal_model.dart';
 import '../../utils/diet_utils.dart';
+import '../manager/diet_cubit.dart';
 
 class BuildMealItem extends StatelessWidget {
   final MealModel meal;
@@ -30,8 +31,11 @@ class BuildMealItem extends StatelessWidget {
       ),
     ];
     return InkWell(
-      onTap: (){
-        Navigator.pushNamed(context, Routes.mealRoute,arguments: meal);
+      onTap: () {
+        Navigator.pushNamed(context, Routes.mealRoute,
+            arguments: MealScreenArguments(
+                dietModel: DietCubit.get(context).nutritionalData,
+                mealModel: meal));
       },
       child: Column(
         children: [

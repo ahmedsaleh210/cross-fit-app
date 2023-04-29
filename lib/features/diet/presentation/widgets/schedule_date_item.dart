@@ -20,8 +20,7 @@ class ScheduleDateItem extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: List.generate(
               7,
-                  (index) =>
-                  Container(
+              (index) => Container(
                     clipBehavior: Clip.antiAlias,
                     decoration: BoxDecoration(
                         color: index == cubit.currentDateIndex

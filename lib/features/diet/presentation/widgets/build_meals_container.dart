@@ -5,7 +5,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../../core/components/app_text.dart';
 import '../../../../core/styles/colors/colors.dart';
-import '../../utils/diet_item.dart';
+import '../../utils/diet_utils.dart';
 import '../manager/diet_cubit.dart';
 import 'build_meal_item.dart';
 

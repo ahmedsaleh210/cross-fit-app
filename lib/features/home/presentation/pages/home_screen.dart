@@ -68,18 +68,12 @@ class HomeScreen extends StatelessWidget {
                                   child: ListView.builder(
                                     physics: const BouncingScrollPhysics(),
                                     itemBuilder: (context, index) {
-                                      if (state is DataLoading) {
-                                        return const ShimmerLoadingItem();
-                                      } else {
-                                        return MealTodayItem(
-                                            mealModel: (state as DataLoaded)
-                                                .mealModel[index]);
-                                      }
+                                      return MealTodayItem(
+                                          mealModel: (state).mealModel[index]);
                                     },
                                     scrollDirection: Axis.horizontal,
-                                    itemCount: state is DataLoaded
-                                        ? state.mealModel.length
-                                        : 5,
+                                    itemCount:
+                                        (state as DataLoaded).mealModel.length,
                                   ),
                                 );
                               },
@@ -89,7 +83,10 @@ class HomeScreen extends StatelessWidget {
                         ),
                       ),
                     )
-                  : Center(child: SpinKitCircle(color: AppColors.kGreen,)));
+                  : Center(
+                      child: SpinKitCircle(
+                      color: AppColors.kGreen,
+                    )));
         },
       ),
     );

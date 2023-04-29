@@ -1,6 +1,5 @@
 import 'dart:developer';
 
-import 'package:cross_fit/features/diet/utils/diet_item.dart';
 import 'package:cross_fit/features/home/data/repositories/home_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -30,42 +29,46 @@ class DietCubit extends Cubit<DietState> {
   List<NutritionalItem> nutritionalItems = [];
   late DietModel nutritionalData;
   void getDiet() async {
-    emit(DietDataLoading());
-    final response = await dietRepository.getDietData();
-    response.fold((l) => log(l.toString()), (data) {
-      nutritionalData = data;
-      nutritionalItems.addAll([
-        NutritionalItem(
-          title: 'Sodium',
-          value: nutritionalData.sodium,
-        ),
-        NutritionalItem(
-          title: 'Protein',
-          value: nutritionalData.proteins,
-        ),
-        NutritionalItem(
-          title: 'Cholesterol',
-          value: nutritionalData.cholesterol,
-        ),
-      ]);
+    try {
+      emit(DietDataLoading());
+      final response = await dietRepository.getDietData();
+      response.fold((l) => log(l.toString()), (data) {
+        nutritionalData = data;
+        nutritionalItems.addAll([
+          NutritionalItem(
+            title: 'Sodium',
+            value: nutritionalData.sodium,
+          ),
+          NutritionalItem(
+            title: 'Protein',
+            value: nutritionalData.proteins,
+          ),
+          NutritionalItem(
+            title: 'Cholesterol',
+            value: nutritionalData.cholesterol,
+          ),
+        ]);
 
-      diets.addAll([
-        DietItem(
-          title: 'Breakfast',
-          meals: data.breakfast!.toList(),
-        ),
-        DietItem(
-          title: 'Launch',
-          meals: data.launch!.toList(),
-        ),
-        DietItem(
-          title: 'Dinner',
-          meals: data.dinner!.toList(),
-        ),
-      ]);
+        diets.addAll([
+          DietItem(
+            title: 'Breakfast',
+            meals: data.breakfast!.toList(),
+          ),
+          DietItem(
+            title: 'Launch',
+            meals: data.launch!.toList(),
+          ),
+          DietItem(
+            title: 'Dinner',
+            meals: data.dinner!.toList(),
+          ),
+        ]);
 
-      emit(DietDataLoaded());
-    });
+        emit(DietDataLoaded());
+      });
+    } catch (e) {
+      log(e.toString());
+    }
   }
 
   void goToDietDetailsScreen(BuildContext context, DietCubit myCubit) {

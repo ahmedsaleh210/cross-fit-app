@@ -1,6 +1,7 @@
 import 'package:cross_fit/core/utils/sizedbox_extension.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import '../../../../core/utils/app_strings.dart';
 import '../manager/todo_cubit.dart';
 import '../widgets/todo_app_bar.dart';
 import '../widgets/todo_container.dart';
@@ -13,7 +14,7 @@ class TodoScreen extends StatelessWidget {
     return BlocProvider(
         create: (context) => TodoCubit(),
         child: Scaffold(
-            appBar: const TodoAppBar(),
+            appBar: const TodoAppBar(title: AppStrings.todoList,isAddButtonVisible: true,),
             body: SingleChildScrollView(
               physics: const BouncingScrollPhysics(),
               child: Column(

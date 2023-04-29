@@ -17,6 +17,8 @@ import '../../features/diet/presentation/manager/diet_cubit.dart';
 import '../../features/onboarding/presentation/manager/onboarding_cubit.dart';
 import '../../features/register/presentation/manager/register_cubit.dart';
 import '../../features/splash/splash_screen.dart';
+import '../../features/todo/presentation/pages/add_task_screen.dart';
+import '../shared/diet_model.dart';
 
 class Routes {
   static const String initialRoute = '/';
@@ -29,6 +31,7 @@ class Routes {
   static const String workoutRoute = '/workout';
   static const String dietDetailsRoute = '/diet_details';
   static const String mealRoute = '/meal';
+  static const String addTaskRoute = '/add_task';
 }
 
 //TODO chain of responsibility COR
@@ -102,12 +105,17 @@ class AppRoutes {
             cubit: myCubit,
           ),
         );
+      case Routes.addTaskRoute:
+        return PageTransition(
+          type: PageTransitionType.rightToLeft,
+          child: const AddTaskScreen(),
+        );
       case Routes.mealRoute:
-        final mealModel = routeSettings.arguments as MealModel;
+        final mealModel = routeSettings.arguments as MealScreenArguments;
         return MaterialPageRoute(
-            fullscreenDialog: true,
             builder: ((context) => MealScreen(
-                  mealModel: mealModel,
+                  mealModel: mealModel.mealModel,
+                  dietModel: mealModel.dietModel,
                 )));
       default:
         return undefinedRoute();
@@ -123,4 +131,11 @@ class AppRoutes {
           )),
     );
   }
+}
+
+class MealScreenArguments {
+  final MealModel mealModel;
+  final DietModel dietModel;
+
+  MealScreenArguments({required this.mealModel, required this.dietModel});
 }
