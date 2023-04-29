@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../../core/components/diet_image_item.dart';
+import '../../../../core/routes/app_router.dart';
 import '../../../../core/styles/colors/colors.dart';
 import '../../data/models/meal_model.dart';
 import '../../utils/diet_utils.dart';
@@ -28,36 +29,41 @@ class BuildMealItem extends StatelessWidget {
         value: meal.fat,
       ),
     ];
-    return Column(
-      children: [
-        Row(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            DietImageItem(
-              imageUrl: meal.image,
-              width: 65.w,
-            ),
-            15.widthSpace,
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                AutoSizeText(
-                  meal.title,
-                  style: const TextStyle(fontWeight: FontWeight.bold),
-                ),
-                5.heightSpace,
-                Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: List.generate(
-                        nutritionalItems.length,
-                        (index) => _mealQuantities(
-                            nutritionalItems[index].title,
-                            nutritionalItems[index].value)))
-              ],
-            ),
-          ],
-        )
-      ],
+    return InkWell(
+      onTap: (){
+        Navigator.pushNamed(context, Routes.mealRoute,arguments: meal);
+      },
+      child: Column(
+        children: [
+          Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              DietImageItem(
+                imageUrl: meal.image,
+                width: 65.w,
+              ),
+              15.widthSpace,
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  AutoSizeText(
+                    meal.title,
+                    style: const TextStyle(fontWeight: FontWeight.bold),
+                  ),
+                  5.heightSpace,
+                  Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: List.generate(
+                          nutritionalItems.length,
+                          (index) => _mealQuantities(
+                              nutritionalItems[index].title,
+                              nutritionalItems[index].value)))
+                ],
+              ),
+            ],
+          )
+        ],
+      ),
     );
   }
 

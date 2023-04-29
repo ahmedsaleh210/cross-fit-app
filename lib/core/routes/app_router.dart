@@ -1,6 +1,7 @@
 import 'package:cross_fit/features/crossfit_layout/presentation/manager/cross_fit_layout_cubit.dart';
 import 'package:cross_fit/features/crossfit_layout/presentation/pages/crossfit_layout.dart';
 import 'package:cross_fit/features/diet/presentation/pages/diet_details_screen.dart';
+import 'package:cross_fit/features/diet/presentation/pages/meal_screen.dart';
 import 'package:cross_fit/features/login/presentation/manager/login_cubit.dart';
 import 'package:cross_fit/features/login/presentation/pages/login_screen.dart';
 import 'package:cross_fit/features/onboarding/presentation/pages/onboarding_screen.dart';
@@ -11,6 +12,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:cross_fit/injector.dart' as di;
+import '../../features/diet/data/models/meal_model.dart';
 import '../../features/diet/presentation/manager/diet_cubit.dart';
 import '../../features/onboarding/presentation/manager/onboarding_cubit.dart';
 import '../../features/register/presentation/manager/register_cubit.dart';
@@ -25,8 +27,8 @@ class Routes {
   static const String onBoardingRoute = '/onboarding';
   static const String layoutRoute = '/layout';
   static const String workoutRoute = '/workout';
-  static const String todoRoute = '/todo';
   static const String dietDetailsRoute = '/diet_details';
+  static const String mealRoute = '/meal';
 }
 
 //TODO chain of responsibility COR
@@ -100,6 +102,13 @@ class AppRoutes {
             cubit: myCubit,
           ),
         );
+      case Routes.mealRoute:
+        final mealModel = routeSettings.arguments as MealModel;
+        return MaterialPageRoute(
+            fullscreenDialog: true,
+            builder: ((context) => MealScreen(
+                  mealModel: mealModel,
+                )));
       default:
         return undefinedRoute();
     }

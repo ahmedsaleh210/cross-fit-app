@@ -10,7 +10,7 @@ import '../../core/routes/app_router.dart';
 import '../../core/shared/user_utils.dart';
 import '../../core/styles/colors/colors.dart';
 import '../../core/utils/assets_manager.dart';
-import '../../core/utils/caching_keys.dart';
+import '../../core/local/caching_keys.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});

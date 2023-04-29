@@ -3,10 +3,8 @@ import 'package:cross_fit/core/components/default_button.dart';
 import 'package:cross_fit/core/utils/assets_manager.dart';
 import 'package:cross_fit/core/utils/sizedbox_extension.dart';
 import 'package:cross_fit/features/register/presentation/widgets/description_item.dart';
-import 'package:cross_fit/features/register/presentation/widgets/gradient_circular_progress.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:hexcolor/hexcolor.dart';
 import 'package:lottie/lottie.dart';
 import '../../../../../core/routes/app_router.dart';
 
@@ -24,7 +22,8 @@ class LoadingDietScreen extends StatelessWidget {
             100.heightSpace,
             const DescriptionItem(content: 'Your personal Info'),
             50.heightSpace,
-            Lottie.asset(LottieAssets.confirmRegister, width: 200.w, height: 200.h),
+            Lottie.asset(LottieAssets.confirmRegister,
+                width: 200.w, height: 200.h),
             // GradientCircularProgressIndicator(
             //   gradient: LinearGradient(
             //     colors: [HexColor('#00C853'), HexColor('#69F0AE')],
@@ -46,7 +45,8 @@ class LoadingDietScreen extends StatelessWidget {
               padding: EdgeInsets.symmetric(horizontal: 55.w),
               child: DefaultButton(
                 onPressed: () {
-                  Navigator.pushNamedAndRemoveUntil(context, Routes.layoutRoute, (route) => false);
+                  Navigator.pushNamedAndRemoveUntil(
+                      context, Routes.layoutRoute, (route) => false);
                 },
                 title: 'Start',
                 height: 38.h,

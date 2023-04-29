@@ -23,13 +23,3 @@ Future<void> main() async {
   UserUtils.uid = FirebaseAuth.instance.currentUser?.uid;
   runApp(const CrossFitApp());
 }
-
-void test() async {
-  final response = await FirebaseFirestore.instance
-      .collection('diets')
-      .doc('8eTrkKkHaRhPzzu7rtBa')
-      .get();
-  final models = (response.data()!['meals']['breakfast'] as List)
-      .map((e) => MealModel.fromJson(e));
-  log('${models.length}');
-}

@@ -4,5 +4,5 @@ class AppStrings {
   static const String summary = 'Summary';
   static const String viewAll = 'View all';
   static const String totalWorkouts = 'Total Workouts';
-
+  static const String todoList = 'Todo List';
 }

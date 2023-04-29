@@ -36,19 +36,4 @@ class DietModel {
           json['meals']['dinner'].map((x) => MealModel.fromJson(x))),
     );
   }
-
-  Map<String, dynamic> toJson() {
-    return {
-      'calories': calories,
-      'cholesterol': cholesterol,
-      'proteins': proteins,
-      'sodium': sodium,
-      'weight_loss': weightLoss,
-      'meals': {
-        'breakfast': breakfast!.map((x) => x.toJson()).toList(),
-        'launch': launch!.map((x) => x.toJson()).toList(),
-        'dinner': dinner!.map((x) => x.toJson()).toList(),
-      },
-    };
-  }
 }

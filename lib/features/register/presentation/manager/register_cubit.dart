@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:cross_fit/core/utils/parsing_extension.dart';
 import 'package:cross_fit/features/register/utils/register_utils.dart';
 import 'package:cross_fit/features/register/presentation/pages/page_views/inbody_info_view.dart';

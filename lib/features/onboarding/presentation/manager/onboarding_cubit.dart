@@ -4,7 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../../core/routes/app_router.dart';
-import '../../../../core/utils/caching_keys.dart';
+import '../../../../core/local/caching_keys.dart';
 import '../../utils/onboarding_model.dart';
 part 'onboarding_state.dart';
 

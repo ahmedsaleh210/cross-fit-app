@@ -17,7 +17,7 @@ class HomeCubit extends Cubit<HomeState> {
     if (isClosed) return;
     emit(DataLoading());
     try {
-      final response = await homeRepository.getDietNutritionals();
+      final response = await homeRepository.getDietData();
       response.fold((error) {
         emit(DataError());
       }, (data) {

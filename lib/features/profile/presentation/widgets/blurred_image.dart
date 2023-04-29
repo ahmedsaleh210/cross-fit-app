@@ -11,7 +11,7 @@ class BlurredImage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 180.h,
+      height: 260.h,
       width: double.infinity,
       decoration: BoxDecoration(
         image: DecorationImage(

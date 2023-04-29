@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../../core/components/app_text.dart';
+import '../../../../core/routes/app_router.dart';
 import '../../../../core/styles/colors/colors.dart';
 import '../../../diet/data/models/meal_model.dart';
 
@@ -26,7 +27,9 @@ class MealTodayItem extends StatelessWidget {
         child: Material(
           color: Colors.transparent,
           child: InkWell(
-            onTap: () {},
+            onTap: () {
+              Navigator.pushNamed(context, Routes.mealRoute, arguments: mealModel);
+            },
             child: Padding(
               padding: EdgeInsets.all(12.r),
               child: Column(

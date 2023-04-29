@@ -1,4 +1,3 @@
-import '../../../../core/shared/user_model.dart';
 import '../../../../core/shared/user_utils.dart';
 
 class ProfileData {
