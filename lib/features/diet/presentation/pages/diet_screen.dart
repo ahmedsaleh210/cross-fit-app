@@ -6,6 +6,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import 'package:cross_fit/injector.dart' as di;
+import 'package:flutter_spinkit/flutter_spinkit.dart';
+
+import '../../../../core/styles/colors/colors.dart';
 
 class DietScreen extends StatelessWidget {
   const DietScreen({Key? key}) : super(key: key);
@@ -37,9 +40,7 @@ class DietScreen extends StatelessWidget {
                         ],
                       ),
                     )
-                  : const Center(
-                      child: CircularProgressIndicator(),
-                    ));
+                  : Center(child: SpinKitCircle(color: AppColors.kGreen,)));
         },
       ),
     );

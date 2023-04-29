@@ -8,7 +8,9 @@ import 'package:cross_fit/features/home/presentation/widgets/shimmer_loading_ite
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 
+import '../../../../core/styles/colors/colors.dart';
 import '../../../../core/utils/app_strings.dart';
 import '../widgets/bar_chart.dart';
 import '../widgets/circular_chart.dart';
@@ -87,7 +89,7 @@ class HomeScreen extends StatelessWidget {
                         ),
                       ),
                     )
-                  : const Center(child: CircularProgressIndicator()));
+                  : Center(child: SpinKitCircle(color: AppColors.kGreen,)));
         },
       ),
     );
