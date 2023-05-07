@@ -25,6 +25,14 @@ class DietCubit extends Cubit<DietState> {
     emit(DietDateChanged());
   }
 
+  List<DateTime> get getDates {
+    final List<DateTime> dates = List.generate(
+      7,
+      (index) => DateTime.now().add(Duration(days: index)),
+    );
+    return dates;
+  }
+
   List<DietItem> diets = [];
   List<NutritionalItem> nutritionalItems = [];
   late DietModel nutritionalData;

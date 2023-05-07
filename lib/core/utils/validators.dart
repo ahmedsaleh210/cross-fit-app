@@ -98,4 +98,36 @@ class Validators {
       return null;
     }
   }
+
+  static String? taskNameValidator(dynamic value) {
+    if (value!.isEmpty) {
+      return 'Please enter task name';
+    } else {
+      return null;
+    }
+  }
+
+  static String? taskDateValidator(dynamic value) {
+    if (value!.isEmpty) {
+      return 'Please enter task date';
+    } else {
+      return null;
+    }
+  }
+
+  static String? taskTimeValidator(dynamic value) {
+    if (value!.isEmpty) {
+      return 'Please enter task time';
+    } else {
+      return null;
+    }
+  }
+
+  static String? taskDescriptionValidator(dynamic value) {
+    if (value!.isEmpty) {
+      return 'Please enter task description';
+    } else {
+      return null;
+    }
+  }
 }

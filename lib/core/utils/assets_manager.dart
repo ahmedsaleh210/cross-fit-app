@@ -18,4 +18,5 @@ class SvgAssets
 class LottieAssets
 {
   static const String confirmRegister = '${lottiePath}confirm_register.json';
+  static const String emptyTodoList = '${lottiePath}empty.json';
 }

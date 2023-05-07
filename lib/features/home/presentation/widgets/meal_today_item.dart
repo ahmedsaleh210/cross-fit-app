@@ -8,6 +8,7 @@ import '../../../../core/components/app_text.dart';
 import '../../../../core/routes/app_router.dart';
 import '../../../../core/styles/colors/colors.dart';
 import '../../../diet/data/models/meal_model.dart';
+import '../../../diet/utils/meal_utils.dart';
 import '../manager/home_cubit.dart';
 
 class MealTodayItem extends StatelessWidget {
@@ -29,7 +30,10 @@ class MealTodayItem extends StatelessWidget {
           color: Colors.transparent,
           child: InkWell(
             onTap: () {
-              Navigator.pushNamed(context, Routes.mealRoute, arguments: MealScreenArguments(mealModel: mealModel, dietModel: HomeCubit.get(context).nutritionalData));
+              Navigator.pushNamed(context, Routes.mealRoute,
+                  arguments: MealScreenArguments(
+                      mealModel: mealModel,
+                      dietModel: HomeCubit.get(context).nutritionalData));
             },
             child: Padding(
               padding: EdgeInsets.all(12.r),

@@ -4,7 +4,6 @@ import 'package:cross_fit/core/components/app_text.dart';
 import 'package:cross_fit/core/utils/sizedbox_extension.dart';
 import 'package:cross_fit/features/home/presentation/manager/home_cubit.dart';
 import 'package:cross_fit/features/home/presentation/widgets/meal_today_item.dart';
-import 'package:cross_fit/features/home/presentation/widgets/shimmer_loading_item.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';

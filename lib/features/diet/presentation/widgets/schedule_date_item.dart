@@ -3,6 +3,7 @@ import 'package:cross_fit/features/diet/presentation/manager/diet_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:intl/intl.dart';
 
 import '../../../../core/components/app_text.dart';
 import '../../../../core/styles/colors/colors.dart';
@@ -15,6 +16,7 @@ class ScheduleDateItem extends StatelessWidget {
     return BlocBuilder<DietCubit, DietState>(
       builder: (context, state) {
         final cubit = DietCubit.get(context);
+        final dates = cubit.getDates;
         return Row(
           crossAxisAlignment: CrossAxisAlignment.end,
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -39,7 +41,7 @@ class ScheduleDateItem extends StatelessWidget {
                           mainAxisAlignment: MainAxisAlignment.end,
                           children: [
                             AppText(
-                              'FRI',
+                              DateFormat('EEE').format(dates[index]),
                               fontSize: 12.sp,
                               fontWeight: FontWeight.bold,
                             ),
@@ -51,7 +53,7 @@ class ScheduleDateItem extends StatelessWidget {
                                 child: Padding(
                                   padding: EdgeInsets.all(5.r),
                                   child: AppText(
-                                    '23',
+                                    DateFormat('dd').format(dates[index]),
                                     fontSize: 10.sp,
                                     fontWeight: FontWeight.bold,
                                     color: Colors.black,

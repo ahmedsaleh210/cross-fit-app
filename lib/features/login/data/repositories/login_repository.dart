@@ -36,6 +36,7 @@ class LoginRepository implements ILoginRepository {
       await sharedPrefrences.setString(
           'userModel', jsonEncode(userData.data()));
       UserUtils.currentUser = UserModel.fromMap(userData.data()!);
+      UserUtils.uid = UserUtils.currentUser!.uid;
       profileDataList;
       log('${UserUtils.currentUser}');
       return Right(userCredential.user!);

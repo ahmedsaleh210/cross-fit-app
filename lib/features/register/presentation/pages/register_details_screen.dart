@@ -69,7 +69,7 @@ class RegisterDetailsScreen extends StatelessWidget {
                       onPageChanged: (index) {
                         cubit.changePage(index);
                       },
-                      // physics: const NeverScrollableScrollPhysics(),
+                      physics: const NeverScrollableScrollPhysics(),
                       itemBuilder: (BuildContext context, int index) {
                         return cubit.registerDetailsViews[index];
                       },

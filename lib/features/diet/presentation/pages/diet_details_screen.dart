@@ -8,40 +8,37 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../widgets/build_meals_container.dart';
 
 class DietDetailsScreen extends StatelessWidget {
-  final DietCubit cubit;
-  const DietDetailsScreen({Key? key, required this.cubit}) : super(key: key);
+  const DietDetailsScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider.value(
-      value: cubit,
-      child: BlocBuilder<DietCubit, DietState>(
-        builder: (context, state) {
-              final dietCubit = context.read<DietCubit>();
+    return BlocBuilder<DietCubit, DietState>(
+      builder: (context, state) {
+        final dietCubit = context.read<DietCubit>();
 
-          return Scaffold(
-            body: CustomScrollView(
-              physics: const BouncingScrollPhysics(),
-              slivers: [
-                const CustomSliverAppBar(),
-                SliverToBoxAdapter(
-                  child: 15.heightSpace,
-                ),
-                SliverList(
-                    delegate: SliverChildBuilderDelegate(
-                        childCount: 3,
-                        (context, index) => Padding(
-                              padding: EdgeInsets.symmetric(
-                                  vertical: 10.h, horizontal: 20.w),
-                              child: BuildMealsContainer(
-                                diets: dietCubit.diets[index],
-                              ),
-                            ))),
-              ],
-            ),
-          );
-        },
-      ),
+        return Scaffold(
+          body: CustomScrollView(
+            physics: const BouncingScrollPhysics(),
+            slivers: [
+              const CustomSliverAppBar(),
+              SliverToBoxAdapter(
+                child: 15.heightSpace,
+              ),
+              SliverList(
+                  delegate: SliverChildBuilderDelegate(
+                      childCount: 3,
+                      (context, index) => Padding(
+                            padding: EdgeInsets.symmetric(
+                                vertical: 10.h, horizontal: 20.w),
+                            child: BuildMealsContainer(
+                              index,
+                              diets: dietCubit.diets[index],
+                            ),
+                          ))),
+            ],
+          ),
+        );
+      },
     );
   }
 }

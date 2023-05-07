@@ -10,6 +10,8 @@ import 'package:cross_fit/features/profile/data/repositories/profile_repository.
 import 'package:cross_fit/features/profile/presentation/manager/profile_cubit.dart';
 import 'package:cross_fit/features/register/data/repositories/register_repository.dart';
 import 'package:cross_fit/features/register/presentation/manager/register_cubit.dart';
+import 'package:cross_fit/features/todo/data/repositories/todo_repository.dart';
+import 'package:cross_fit/features/todo/presentation/manager/todo_cubit.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get_it/get_it.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -31,6 +33,7 @@ Future<void> init() async {
   sl.registerFactory<DietCubit>(
       () => DietCubit(dietRepository: sl(), homeRepository: sl()));
   sl.registerFactory<ProfileCubit>(() => ProfileCubit(profileRepository: sl()));
+  sl.registerFactory<TodoCubit>(() => TodoCubit(todoRepository: sl()));
 
   //TODO Repositories
   sl.registerLazySingleton<IRegisterRepository>(() =>
@@ -43,6 +46,8 @@ Future<void> init() async {
       () => DietRepository(FirebaseFirestore.instance));
   sl.registerLazySingleton<IProfileRepository>(
       () => ProfileRepository(FirebaseAuth.instance));
+  sl.registerLazySingleton<ITodoRepository>(
+      () => TodoRepository(FirebaseFirestore.instance));
 
   //TODO EXTERNAL
   final sharedPreferences = await SharedPreferences.getInstance();

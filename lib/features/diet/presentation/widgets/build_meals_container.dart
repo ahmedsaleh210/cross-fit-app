@@ -11,7 +11,8 @@ import 'build_meal_item.dart';
 
 class BuildMealsContainer extends StatelessWidget {
   final DietItem diets;
-  const BuildMealsContainer({Key? key, required this.diets}) : super(key: key);
+  final int index;
+  const BuildMealsContainer(this.index,{Key? key, required this.diets}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -43,7 +44,7 @@ class BuildMealsContainer extends StatelessWidget {
               padding: EdgeInsets.symmetric(horizontal: 15.w, vertical: 10.h),
               child: Column(
                   children: List.generate(
-                cubit.diets.length,
+                cubit.diets[index].meals.length,
                 (index) => Padding(
                   padding: EdgeInsets.symmetric(vertical: 8.h),
                   child: BuildMealItem(meal: diets.meals[index]),

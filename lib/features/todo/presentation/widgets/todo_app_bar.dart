@@ -4,12 +4,17 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../../core/components/app_text.dart';
 import '../../../../core/routes/app_router.dart';
+import '../manager/todo_cubit.dart';
 
 class TodoAppBar extends StatelessWidget with PreferredSizeWidget {
   final String title;
   final bool isAddButtonVisible;
+  final TodoCubit? todoCubit;
   const TodoAppBar(
-      {super.key, required this.title, required this.isAddButtonVisible});
+      {super.key,
+      required this.title,
+      required this.isAddButtonVisible,
+      this.todoCubit});
 
   @override
   Widget build(BuildContext context) {
@@ -25,7 +30,8 @@ class TodoAppBar extends StatelessWidget with PreferredSizeWidget {
         if (isAddButtonVisible) ...{
           IconButton(
             onPressed: () {
-              Navigator.pushNamed(context, Routes.addTaskRoute);
+              Navigator.pushNamed(context, Routes.addTaskRoute,
+                  arguments: todoCubit);
             },
             icon: Icon(
               Icons.add,

@@ -8,6 +8,7 @@ import '../../../../core/routes/app_router.dart';
 import '../../../../core/styles/colors/colors.dart';
 import '../../data/models/meal_model.dart';
 import '../../utils/diet_utils.dart';
+import '../../utils/meal_utils.dart';
 import '../manager/diet_cubit.dart';
 
 class BuildMealItem extends StatelessWidget {
@@ -50,9 +51,12 @@ class BuildMealItem extends StatelessWidget {
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  AutoSizeText(
-                    meal.title,
-                    style: const TextStyle(fontWeight: FontWeight.bold),
+                  SizedBox(
+                    width: MediaQuery.of(context).size.width * 0.5,
+                    child: AutoSizeText(
+                      meal.title,
+                      style: const TextStyle(fontWeight: FontWeight.bold),
+                    ),
                   ),
                   5.heightSpace,
                   Column(

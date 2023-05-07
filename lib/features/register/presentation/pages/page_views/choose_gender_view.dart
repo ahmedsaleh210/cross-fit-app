@@ -15,7 +15,7 @@ class ChooseGenderView extends StatelessWidget {
       padding: EdgeInsets.only(top: 30.h, right: 15.w, left: 15.w),
       child: Column(
         children: [
-          const DescriptionItem(content: 'Select your age',),
+          const DescriptionItem(content: 'Select your gender',),
           50.heightSpace,
           Row(
               children: List.generate(genders.length, (index) {

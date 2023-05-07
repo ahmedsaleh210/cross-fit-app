@@ -22,7 +22,6 @@ class DietItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: double.infinity,
-      height: 130.h,
       clipBehavior: Clip.antiAliasWithSaveLayer,
       decoration: BoxDecoration(
         color: AppColors.kDarkBlack,
@@ -64,14 +63,16 @@ class DietItem extends StatelessWidget {
                     fontSize: 17.sp,
                     fontWeight: FontWeight.bold,
                     color: AppColors.kGreen),
-                const Spacer(),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: List.generate(
-                      nutritionalItems.length,
-                      (index) =>
-                          _buildDetails(context, nutritionalItems[index])),
-                )
+                Wrap(
+                    children: List.generate(
+                            nutritionalItems.length,
+                            (index) =>
+                                _buildDetails(context, nutritionalItems[index]))
+                        .map((e) => Padding(
+                              padding: EdgeInsets.only(right: 10.w, top: 4.h),
+                              child: e,
+                            ))
+                        .toList()),
               ],
             ),
           ),

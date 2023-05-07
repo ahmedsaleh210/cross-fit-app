@@ -16,7 +16,8 @@ class CrossFitApp extends StatelessWidget {
           title: 'CrossFit',
           color: AppColors.kGreen,
           debugShowCheckedModeBanner: false,
-          theme: appTheme(),
+          themeMode: ThemeMode.dark,
+          darkTheme: appTheme(),
           onGenerateRoute: AppRoutes.onGenerateRoute,
         );
       },

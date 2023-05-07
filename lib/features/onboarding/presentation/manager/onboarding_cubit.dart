@@ -22,7 +22,7 @@ class OnBoardingCubit extends Cubit<OnBoardingState> {
         body:
             'Lorem ipsum dolor sit amet consectetur. Amet consectetur odio fermentum vitae. Nulla eget mattis in est pulvinar felis.'),
     BoardingModel(
-        image: ImgAssets.diet,
+        image: ImgAssets.workout,
         title: 'Suitable Workout',
         body:
             'Lorem ipsum dolor sit amet consectetur. Amet consectetur odio fermentum vitae. Nulla eget mattis in est pulvinar felis.'),

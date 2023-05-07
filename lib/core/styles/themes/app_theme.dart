@@ -8,7 +8,7 @@ ThemeData appTheme() {
   return ThemeData(
     primaryColor: AppColors.kGreen,
     scaffoldBackgroundColor: AppColors.kMediumBlack,
-    colorScheme: ColorScheme.light(
+    colorScheme: ColorScheme.dark(
       primary: AppColors.kGreen,
     ),
     fontFamily: FontsConstants.poppinsFont,

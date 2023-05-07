@@ -127,15 +127,16 @@ class RegisterRepository implements IRegisterRepository {
         bmi: bmi,
         fatMass: fatMass);
     try {
+      final sharedPrefrences = di.sl<SharedPreferences>();
+      await sharedPrefrences.setString(
+          'userModel', jsonEncode(userMap.toMap()));
       await _firestore
           .collection(FirebaseConstants.usersCollection)
           .doc(user.uid)
           .set(userMap.toMap());
       await _addDietToUserAccount(user.uid, bmi);
-      final sharedPrefrences = di.sl<SharedPreferences>();
-      await sharedPrefrences.setString(
-          'userModel', jsonEncode(userMap.toMap()));
       UserUtils.currentUser = userMap;
+      UserUtils.uid = user.uid;
       profileDataList;
     } catch (e) {
       log(e.toString());
@@ -143,25 +144,29 @@ class RegisterRepository implements IRegisterRepository {
   }
 
   Future<void> _addDietToUserAccount(userId, bmi) async {
-    List<String> diets = ['8eTrkKkHaRhPzzu7rtBa', 'AJ31kKMIoxFy6jk3HZiu'];
-    if (bmi < 23) {
-      final response = await _firestore
-          .collection(FirebaseConstants.dietsCollection)
-          .doc(diets[0])
-          .get();
-      await _firestore
-          .collection(FirebaseConstants.usersCollection)
-          .doc(userId)
-          .update({'diet': response.data()});
-    } else {
-      final response = await _firestore
-          .collection(FirebaseConstants.dietsCollection)
-          .doc(diets[1])
-          .get();
-      await _firestore
-          .collection(FirebaseConstants.usersCollection)
-          .doc(userId)
-          .update({'diet': response.data()});
+    try {
+      List<String> diets = ['AJ31kKMIoxFy6jk3HZiu', '8eTrkKkHaRhPzzu7rtBa'];
+      if (bmi < 23) {
+        final response = await _firestore
+            .collection(FirebaseConstants.dietsCollection)
+            .doc(diets[0])
+            .get();
+        await _firestore
+            .collection(FirebaseConstants.usersCollection)
+            .doc(userId)
+            .update({'diet': response.data()});
+      } else {
+        final response = await _firestore
+            .collection(FirebaseConstants.dietsCollection)
+            .doc(diets[1])
+            .get();
+        await _firestore
+            .collection(FirebaseConstants.usersCollection)
+            .doc(userId)
+            .update({'diet': response.data()});
+      }
+    } catch (e) {
+      log(e.toString());
     }
   }
 }

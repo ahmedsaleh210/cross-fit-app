@@ -8,17 +8,17 @@ import 'package:cross_fit/features/onboarding/presentation/pages/onboarding_scre
 import 'package:cross_fit/features/register/presentation/pages/page_views/loading_view.dart';
 import 'package:cross_fit/features/register/presentation/pages/register_details_screen.dart';
 import 'package:cross_fit/features/register/presentation/pages/register_screen.dart';
+import 'package:cross_fit/features/todo/presentation/manager/todo_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:cross_fit/injector.dart' as di;
-import '../../features/diet/data/models/meal_model.dart';
 import '../../features/diet/presentation/manager/diet_cubit.dart';
+import '../../features/diet/utils/meal_utils.dart';
 import '../../features/onboarding/presentation/manager/onboarding_cubit.dart';
 import '../../features/register/presentation/manager/register_cubit.dart';
 import '../../features/splash/splash_screen.dart';
 import '../../features/todo/presentation/pages/add_task_screen.dart';
-import '../shared/diet_model.dart';
 
 class Routes {
   static const String initialRoute = '/';
@@ -98,17 +98,22 @@ class AppRoutes {
           child: const LoadingDietScreen(),
         );
       case Routes.dietDetailsRoute:
-        final myCubit = routeSettings.arguments as DietCubit;
+        final dietCubit = routeSettings.arguments as DietCubit;
         return PageTransition(
           type: PageTransitionType.rightToLeft,
-          child: DietDetailsScreen(
-            cubit: myCubit,
+          child: BlocProvider.value(
+            value: dietCubit,
+            child: const DietDetailsScreen(),
           ),
         );
       case Routes.addTaskRoute:
+        final todoCubit = routeSettings.arguments as TodoCubit;
         return PageTransition(
           type: PageTransitionType.rightToLeft,
-          child: const AddTaskScreen(),
+          child: BlocProvider.value(
+            value: todoCubit,
+            child: const AddTaskScreen(),
+          ),
         );
       case Routes.mealRoute:
         final mealModel = routeSettings.arguments as MealScreenArguments;
@@ -131,11 +136,4 @@ class AppRoutes {
           )),
     );
   }
-}
-
-class MealScreenArguments {
-  final MealModel mealModel;
-  final DietModel dietModel;
-
-  MealScreenArguments({required this.mealModel, required this.dietModel});
 }

@@ -12,10 +12,7 @@ import '../../../../core/shared/user_utils.dart';
 import '../../../home/presentation/pages/home_screen.dart';
 import 'package:cross_fit/injector.dart' as di;
 
-
 part 'cross_fit_layout_state.dart';
-
-
 
 class CrossFitLayoutCubit extends Cubit<CrossFitLayoutState> {
   CrossFitLayoutCubit() : super(CrossFitLayoutInitial());
@@ -29,8 +26,10 @@ class CrossFitLayoutCubit extends Cubit<CrossFitLayoutState> {
 
   void getUserData() async {
     final sharedPref = di.sl<SharedPreferences>();
-    final jsonData = sharedPref.getString('userModel');
-    UserUtils.currentUser = UserModel.fromMap(jsonDecode(jsonData!));
+    final cachedData = sharedPref.getString('userModel');
+    if(cachedData!=null){
+    UserUtils.currentUser = UserModel.fromMap(jsonDecode(cachedData));
+    }
   }
 
   List<Widget> screens = const [
